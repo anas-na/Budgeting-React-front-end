@@ -1,9 +1,10 @@
 import TransactionDetails from '../Components/TransactionDetails'
-const Show = ({deletedTransaction}) => {
+
+const Show = ({deleteTransaction}) => {
     return (
         <div>
-            <h2>Show</h2>
-            <TransactionDetails deletedTransaction={deletedTransaction} />
+            <h2>Transaction</h2>
+            <TransactionDetails deleteTransaction={deleteTransaction} />
         </div>
     )
 }

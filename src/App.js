@@ -5,8 +5,11 @@ import Home from "./Pages/Home";
 import NavBar from "./Components/NavBar";
 import Index from "./Pages/Index";
 import Show from "./Pages/Show";
-// import New from "./Pages/New";
+import New from "./Pages/New";
 import FourOFour from "./Pages/FourOFour";
+import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 import { apiURL } from "./Util/apiURL"
 const API = apiURL();
@@ -25,7 +28,14 @@ function App() {
   useEffect(() => {
     fetchTransactions();
   }, [])
-
+  const addTransaction = async (NewLog) => {
+    try {
+      const res = await axios.post(`${API}/transactions`, NewLog)
+      setTransactions(prevTransactions => [...prevTransactions, res.data])
+    } catch (error) {
+      console.log(error)
+    }
+  }
   const deleteTransaction = async (index) => {
     try {
       await axios.delete(`${API}/transactions/${index}`)
@@ -44,9 +54,9 @@ function App() {
         <Route exact path={"/transactions"}>
           <Index transactions={transactions} />
         </Route>
-        {/* <Route path={"/logs/new"}>
-          <New addLog={addTransaction} />
-        </Route> */}
+        <Route path={"/transactions/new"}>
+          <New addTransaction={addTransaction} />
+        </Route>
         <Route exact path={"/transactions/:index"}>
           <Show deleteTransaction={deleteTransaction} />
         </Route>
