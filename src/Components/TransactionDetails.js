@@ -33,9 +33,9 @@ const TransactionDetails = ({ deleteTransaction }) => {
       <Link to={`/transactions`}>
         <button type="button" class="btn btn-primary btn-sm">Back</button>
       </Link>
-      {/* <Link>
+        <Link>
         <button to={`/transactions/${index}/edit`}>Edit</button>
-      </Link> */}
+      </Link>
       <button type="button" class="btn btn-primary btn-sm" onClick={handleDelete}>Delete</button>
       </div>
       <div>

@@ -1,8 +1,13 @@
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useState, useEffect} from "react";
+import {useHistory, useParams} from "react-router-dom"
+import axios from "axios"
 
-const TransactionNew = (props) => {
-  let history = useHistory();
+import { apiURL } from "../Util/apiURL";
+const API = apiURL();
+
+const TransactionEdit = ({ updateTransaction }, props) => {
+    let history = useHistory();
+    let { index } = useParams();
   const [transaction, setTransaction] = useState({
     from: "",
     date: "",
@@ -10,7 +15,7 @@ const TransactionNew = (props) => {
     amount: "",
   });
   const handleTextChange = (e) => {
-    setTransaction({ ...transaction, [e.target.id]: e.target.value });
+    setTransaction({ ...transaction, [e.target.index]: e.target.value });
   };
 
   const handleNumber = (e) => {
@@ -19,13 +24,25 @@ const TransactionNew = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.addTransaction(transaction);
-    history.push("/transactions");
+    props.updateTransaction(transaction,index);
+    history.push(`/transactions/${index}`);
   };
+    
+  useEffect(() => {
+    const fetchTransaction = async () => {
+      try {
+        const res = await axios.get(`${API}/transactions/${index}`);
+        setTransaction(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchTransaction();
+  }, [index]);
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="d-flex flex-column justify-content-centert">
+      <form onSubmit={handleSubmit} className="form">
         <label htmlFor="date">Transaction Date:</label>
         <input
           id="date"
@@ -71,4 +88,4 @@ const TransactionNew = (props) => {
   );
 };
 
-export default TransactionNew;
+export default TransactionEdit;

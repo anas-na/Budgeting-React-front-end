@@ -5,7 +5,7 @@ const Index = ({ transactions }) => {
     
 
     useEffect(() => {
-        const reducer = async () => {
+        const reduceFunction = async () => {
             const transactionsAmounts = transactions.map(transaction => {
                 return transaction.amount
             });
@@ -15,7 +15,7 @@ const Index = ({ transactions }) => {
             const sumOfTransactions = transactionsAmounts.reduce(result, 0);
             setTotal(sumOfTransactions)
         };
-        reducer();
+        reduceFunction();
     }, [transactions])
     return (
         <div>

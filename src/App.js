@@ -7,16 +7,16 @@ import Index from "./Pages/Index";
 import Show from "./Pages/Show";
 import New from "./Pages/New";
 import FourOFour from "./Pages/FourOFour";
-import './App.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Edit from "./Pages/Edit";
 
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import { apiURL } from "./Util/apiURL"
+import { apiURL } from "./Util/apiURL";
 const API = apiURL();
 
-
 function App() {
-  const [transactions, setTransactions] = useState([])
+  const [transactions, setTransactions] = useState([]);
   const fetchTransactions = async () => {
     try {
       const res = await axios.get(`${API}/transactions`);
@@ -24,28 +24,40 @@ function App() {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
   useEffect(() => {
     fetchTransactions();
-  }, [])
+  }, []);
+  
   const addTransaction = async (NewLog) => {
     try {
-      const res = await axios.post(`${API}/transactions`, NewLog)
-      setTransactions(prevTransactions => [...prevTransactions, res.data])
+      const res = await axios.post(`${API}/transactions`, NewLog);
+      setTransactions((prevTransactions) => [...prevTransactions, res.data]);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
   const deleteTransaction = async (index) => {
     try {
-      await axios.delete(`${API}/transactions/${index}`)
+      await axios.delete(`${API}/transactions/${index}`);
       const dummyState = [...transactions];
       dummyState.splice(index, 1);
-      setTransactions(dummyState)
+      setTransactions(dummyState);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
+
+  const updateTransaction = async (transactionToUpdate, index) => {
+    try {
+      await axios.put(`${API}/transactions/${index}`, transactionToUpdate);
+      const newTransactions = [...transactions];
+      newTransactions[index] = transactionToUpdate;
+      setTransactions(newTransactions);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="App">
       <NavBar />
@@ -59,6 +71,9 @@ function App() {
         </Route>
         <Route exact path={"/transactions/:index"}>
           <Show deleteTransaction={deleteTransaction} />
+        </Route>
+        <Route exact path={"/transactions/:index/edit"}>
+          <Edit updateTransaction={updateTransaction} />
         </Route>
         <Route path="*">
           <FourOFour />
