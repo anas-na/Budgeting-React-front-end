@@ -18,8 +18,9 @@ const Index = ({ transactions }) => {
   }, [transactions]);
   return (
     <div>
-      <h1>Bank Account Total Amount: {total} </h1>
-
+      <h1>Bank Account Total Amount: {total < 50 ? <div class="text-danger">{total}</div> : <div class="text-success">{total}</div> 
+      } </h1>
+      
       <Transactions transactions={transactions} />
     </div>
   );
