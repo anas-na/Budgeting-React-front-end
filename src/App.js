@@ -28,7 +28,7 @@ function App() {
   useEffect(() => {
     fetchTransactions();
   }, []);
-  
+
   const addTransaction = async (NewLog) => {
     try {
       const res = await axios.post(`${API}/transactions`, NewLog);

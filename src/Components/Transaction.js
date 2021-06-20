@@ -12,8 +12,8 @@ const Transaction = ({ transaction, index }) => {
     // </li>
     // </div>
     <div>
-      <table class="table">
-        <thead class="thead-dark">
+      <table className="table">
+        <thead className="thead-dark">
           <tr>
             <th>Date</th>
             <th>Transaction </th>

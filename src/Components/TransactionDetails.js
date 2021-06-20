@@ -28,37 +28,44 @@ const TransactionDetails = ({ deleteTransaction }) => {
     history.push("/transactions");
   };
   return (
-    <div >
+    <div>
       <div className="d-flex justify-content-around">
-      <Link to={`/transactions`}>
-        <button type="button" class="btn btn-primary btn-sm">Back</button>
-      </Link>
-        <Link>
-        <button to={`/transactions/${index}/edit`}>Edit</button>
-      </Link>
-      <button type="button" class="btn btn-primary btn-sm" onClick={handleDelete}>Delete</button>
+        <Link to={`/transactions`}>
+          <button type="button" className="btn btn-primary btn-sm">
+            Back
+          </button>
+        </Link>
+        <Link to={`/transactions/${index}/edit`}>
+          <button type="button" className="btn btn-primary btn-sm">
+            Edit
+          </button>
+        </Link>
+        <button
+          type="button"
+          className="btn btn-primary btn-sm"
+          onClick={handleDelete}
+        >
+          Delete
+        </button>
       </div>
       <div>
-      <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th>Date</th>
-            <th>Transaction </th>
-            <th>Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">{transaction.date}</th>
-            <td>
-              {transaction.name}
-            </td>
-            <td>{transaction.amount}</td>
-          </tr>
-        </tbody>
-      </table>
+        <table className="table">
+          <thead className="thead-dark">
+            <tr>
+              <th>Date</th>
+              <th>Transaction </th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">{transaction.date}</th>
+              <td>{transaction.name}</td>
+              <td>{transaction.amount}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      
     </div>
   );
 };

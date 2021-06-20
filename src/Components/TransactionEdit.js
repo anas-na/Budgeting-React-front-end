@@ -1,13 +1,13 @@
-import { useState, useEffect} from "react";
-import {useHistory, useParams} from "react-router-dom"
-import axios from "axios"
+import { useState, useEffect } from "react";
+import { useHistory, useParams } from "react-router-dom";
+import axios from "axios";
 
 import { apiURL } from "../Util/apiURL";
 const API = apiURL();
 
-const TransactionEdit = ({ updateTransaction }, props) => {
-    let history = useHistory();
-    let { index } = useParams();
+const TransactionEdit = ({ updateTransaction }) => {
+  let history = useHistory();
+  let { index } = useParams();
   const [transaction, setTransaction] = useState({
     from: "",
     date: "",
@@ -15,23 +15,24 @@ const TransactionEdit = ({ updateTransaction }, props) => {
     amount: "",
   });
   const handleTextChange = (e) => {
-    setTransaction({ ...transaction, [e.target.index]: e.target.value });
+    setTransaction({ ...transaction, [e.target.id]: e.target.value });
   };
 
   const handleNumber = (e) => {
     setTransaction({ ...transaction, amount: Number(e.target.value) });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    props.updateTransaction(transaction,index);
+    await updateTransaction(transaction, index);
     history.push(`/transactions/${index}`);
   };
-    
+
   useEffect(() => {
     const fetchTransaction = async () => {
       try {
         const res = await axios.get(`${API}/transactions/${index}`);
+        console.log(res.data);
         setTransaction(res.data);
       } catch (error) {
         console.log(error);
@@ -41,18 +42,19 @@ const TransactionEdit = ({ updateTransaction }, props) => {
   }, [index]);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className="form">
+    <div className="d-flex flex-column  align-items-center">
+      <form onSubmit={handleSubmit} className="form d-flex flex-column col-5">
         <label htmlFor="date">Transaction Date:</label>
         <input
           id="date"
           value={transaction.date}
           type="date"
           onChange={handleTextChange}
-          placeholder="Transaction Date"
+          placeholder="yyyy-MM-dd"
+          pattern="\d{4}-\d{2}-\d{2}"
           required
-              />
-              
+        />
+
         <label htmlFor="name">Name:</label>
         <input
           id="name"
