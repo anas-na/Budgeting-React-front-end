@@ -28,7 +28,9 @@ const TransactionDetails = ({ deleteTransaction }) => {
     history.push("/transactions");
   };
   return (
-    <div>
+    <div className="d-flex flex-column  align-items-center fontType">
+      
+    <div className="d-flex flex-column col-7">
       <div className="d-flex justify-content-around">
         <Link to={`/transactions`}>
           <button type="button" className="btn btn-primary btn-sm">
@@ -36,7 +38,10 @@ const TransactionDetails = ({ deleteTransaction }) => {
           </button>
         </Link>
         <Link to={`/transactions/${index}/edit`}>
-          <button type="button" className="btn btn-primary btn-sm">
+          <button
+            type="button"
+            className="btn btn-primary btn-sm"
+          >
             Edit
           </button>
         </Link>
@@ -66,6 +71,7 @@ const TransactionDetails = ({ deleteTransaction }) => {
           </tbody>
         </table>
       </div>
+    </div>
     </div>
   );
 };

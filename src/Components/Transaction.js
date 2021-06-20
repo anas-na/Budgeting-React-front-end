@@ -2,17 +2,8 @@ import { Link } from "react-router-dom";
 
 const Transaction = ({ transaction, index }) => {
   return (
-    // <div >
-    //     <li className='transaction'>
-    //         <div>
-    //             {transaction.date}
-    //         </div>
-    //     <Link to={`/transactions/${index}`}>{ transaction.name }</Link>
-    //         <div>{transaction.amount}</div>
-    // </li>
-    // </div>
     <div>
-      <table className="table">
+      <table className="table fontType">
         <thead className="thead-dark">
           <tr>
             <th>Date</th>

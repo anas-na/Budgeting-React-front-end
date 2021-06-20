@@ -24,7 +24,7 @@ const TransactionNew = (props) => {
   };
 
   return (
-    <div className="d-flex flex-column  align-items-center">
+    <div className="d-flex flex-column  align-items-center fontType">
       <form onSubmit={handleSubmit} className="d-flex flex-column col-5">
         <label htmlFor="date">Transaction Date:</label>
         <input
