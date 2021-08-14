@@ -18,4 +18,4 @@ https://github.com/itsanasna/budgeting-app-backend
 https://budgeting-backend-app.herokuapp.com
 ```
 
-this budgetting app was created using React, Express and Bootstrap.
+this budgetting app was created using React, Express, SQL and Bootstrap.
